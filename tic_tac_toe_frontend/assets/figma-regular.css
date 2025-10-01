@@ -1,0 +1,313 @@
+/* Ocean Professional Design Tokens */
+:root {
+  --color-primary: #2563EB;  /* Ocean Blue */
+  --color-secondary: #F59E0B; /* Amber */
+  --color-bg: #f9fafb;
+  --color-surface: #ffffff;
+  --color-text: #111827;
+
+  /* Figma tokens referenced in design_system */
+  --fig-color-adafb3: #adafb3;
+  --fig-color-1d1d1f: #1d1d1f;
+  --fig-color-ffffff: #ffffff;
+  --fig-color-262629: #262629;
+  --fig-color-ebebeb: #ebebeb;
+  --fig-color-000000: #000000;
+  --fig-color-f5f5f5: #f5f5f5;
+  --fig-color-0047ff: #0047ff;
+  --fig-color-e5e5e5: #e5e5e5;
+  --fig-color-141414: #141414;
+  --fig-color-1f1f1f: #1f1f1f;
+
+  /* Typography (Lexend; fallbacks) */
+  --font-family: "Lexend", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+  /* Shadows mapped from design_system (softened to match Ocean Professional yet preserving offsets) */
+  --shadow-0: 0 1px 2px 0 rgba(0, 14, 51, 0.15);
+  --shadow-1: 0 1px 1px 0 rgba(0, 14, 51, 0.12);
+  --shadow-2: 0 3px 2px 0 rgba(0, 71, 255, 0.2);
+  --shadow-3: 0 1.5px 1px 0 rgba(0, 31, 112, 0.15);
+  --shadow-5: 0 4px 4px 0 rgba(0, 14, 51, 0.16);
+
+  /* Radii from tokens */
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-80: 80px;
+
+  /* Spacing (key values used) */
+  --s-4: 4px;
+  --s-6: 6px;
+  --s-8: 8px;
+  --s-10: 10px;
+  --s-12: 12px;
+  --s-16: 16px;
+  --s-18: 18px;
+  --s-24: 24px;
+  --s-44: 44px;
+}
+
+/* Global */
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.screen.regular {
+  width: 1200px;   /* from figma dimensions */
+  height: 800px;   /* from figma dimensions */
+  margin: 24px auto;
+  position: relative;
+  background: linear-gradient(180deg, rgba(37,99,235,0.06) 0%, rgba(249,250,251,1) 100%); /* Ocean subtle gradient */
+  border-radius: var(--radius-24); /* style_0 border radius */
+  overflow: hidden;
+  box-shadow: var(--shadow-0);
+}
+
+/* Root frame background color (style_0 background color: color_adafb3), layered with gradient above */
+.frame.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--fig-color-adafb3);
+  padding: 0;
+}
+
+/* Light and Dark mode cards sizes and absolute positions from JSON
+   Light Mode: 426x396 at x=1812,y=-5104 within Figma canvas; in our root 1200x800, we lay them as two cards side-by-side centered.
+*/
+.card {
+  position: absolute;
+  width: 426px;
+  height: 396px;
+  border-radius: var(--radius-16); /* style_79/style_75 */
+  background: var(--color-surface);
+  box-shadow: var(--shadow-0);
+}
+
+/* Positioning (approximate relative placement mirroring Figma layout inside the 1200x800 frame) */
+.card.light-mode {
+  left: 180px;
+  top: 202px;
+  background-color: var(--fig-color-f5f5f5); /* style_79 bg */
+}
+
+.card.dark-mode {
+  left: 600px;
+  top: 202px;
+  background-color: var(--fig-color-1d1d1f); /* style_75 bg */
+  color: #fff;
+}
+
+/* Header */
+.calendar-header {
+  position: absolute;
+  left: 24px;  /* within card, frame had 378 width centered inside 426 => 24px side padding */
+  top: 24px;
+  width: 378px;
+  height: 44px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 0;
+}
+
+.calendar-header.dark { /* style_75 shadow/appearance on dark card */
+  color: #fff;
+}
+
+/* Navigation buttons - circular 44x44 with large (80px) radius (style_80 on light, style_76 dark) */
+.nav-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-80);
+  background: var(--fig-color-ffffff);
+  box-shadow: var(--shadow-1);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.nav-btn.dark {
+  background: var(--fig-color-262629);
+}
+.nav-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-5); }
+.nav-btn:active { transform: translateY(0); }
+
+/* Chevron icon size 24x24 as per JSON */
+.icon.chevron {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: none;
+}
+
+/* Month + Year cluster */
+.month-year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Select chips (Month/Year) style_81 on light, style_77 on dark: 6px radius, shadow-1 */
+.select {
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-radius: var(--radius-6);
+  background: var(--fig-color-ffffff);
+  box-shadow: var(--shadow-1);
+  border: 0;
+  cursor: default;
+}
+.select .label {
+  font-weight: 700; /* typo_20 weight 700 */
+  font-size: 24px;  /* typo_20 size */
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  color: var(--fig-color-141414);
+}
+.select .dropdown img {
+  width: 8px;
+  height: 8px;
+}
+
+.select.dark {
+  background: var(--fig-color-262629);
+}
+.select.dark .label {
+  color: var(--fig-color-f5f5f5);
+}
+
+/* Day of Week row: width 378, height 44 */
+.dow {
+  position: absolute;
+  left: 24px;
+  top: 24px; /* header top */
+  transform: translateY(56px); /* header 44 + ~12 spacing (as seen in Figma hierarchy from -5080 to -5024) */
+  width: 378px;
+  height: 44px;
+  display: grid;
+  grid-template-columns: repeat(7, 54px);
+  column-gap: 0;
+}
+.dow .dow-cell {
+  width: 54px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-4); /* style_9 */
+  color: var(--fig-color-1f1f1f); /* typo_21 color */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+}
+.dow.dark .dow-cell {
+  color: #ffffff; /* typo_18 for dark DoW (Header group in dark showed white text) with 0.2 opacity bg in json; text readable */
+}
+
+/* Weeks container (378x236) */
+.weeks {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  transform: translateY(56px + 44px); /* move below DoW by 44px */
+  width: 378px;
+  height: 236px;
+  display: grid;
+  grid-auto-rows: 44px;
+  row-gap: 4px; /* subtle spacing to visually separate rows */
+}
+
+/* A week row = 7 cells at 54x44 */
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 54px);
+}
+
+/* Day cells styles:
+   - Regular: style_82 (light) => border 0.5px #e5e5e5, radius 6
+   - Dark: style_78 (dark) => same border 0.5px, bg dark token
+   - Disabled: style_11 radius=6 with text opacity 0.1 (style_12)
+   - Today: style_14 (bg #0047ff, border 2px white, radius 6) with text white
+*/
+.day {
+  width: 54px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-6);
+  background: var(--fig-color-ffffff);
+  border: 0.5px solid var(--fig-color-e5e5e5);
+  color: var(--fig-color-1f1f1f); /* typo_21 */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+  user-select: none;
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.day.dark {
+  background: var(--fig-color-262629);
+  border-color: var(--fig-color-e5e5e5);
+  color: var(--fig-color-ebebeb);
+}
+.day.disabled {
+  background: var(--fig-color-ffffff);
+  color: rgba(31,31,31,0.1); /* style_12 opacity */
+  border: none;
+}
+.day.disabled.dark {
+  background: var(--fig-color-262629);
+  color: rgba(255,255,255,0.2); /* mimic 0.2 text opacity on dark */
+  border: none;
+}
+.day.today {
+  background: var(--fig-color-0047ff);
+  color: #ffffff; /* typo_18 */
+  border: 2px solid #ffffff;
+  box-shadow: var(--shadow-2), var(--shadow-3);
+}
+.day.today.dark {
+  background: var(--fig-color-0047ff);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: var(--shadow-2), var(--shadow-3);
+}
+
+/* Hover (style_82/78 had border + subtle elevation) */
+.day:not(.disabled):hover {
+  box-shadow: var(--shadow-1);
+}
+
+/* Responsive: maintain visual proportions while scaling down; min-width to preserve columns */
+@media (max-width: 1280px) {
+  .screen.regular {
+    transform: scale(0.95);
+    transform-origin: top center;
+  }
+}
+@media (max-width: 1024px) {
+  .screen.regular {
+    transform: scale(0.85);
+  }
+}
+@media (max-width: 860px) {
+  .screen.regular {
+    transform: scale(0.75);
+  }
+}
+@media (max-width: 720px) {
+  .screen.regular {
+    transform: scale(0.65);
+  }
+}
